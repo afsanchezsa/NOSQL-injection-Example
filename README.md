@@ -1,6 +1,7 @@
 ##
 Execute this commands in console for launch mongodb on port 27017 and create seeds of th database in this lab:
 
+```
 docker run --name dbmongocs -p 27017:27017  mongo:3.1
 docker exec -it dbmongocs bash
 mongo
@@ -15,6 +16,8 @@ db.products.insert({name:'leche',precio:'10000',marca:'colanta'})
 db.products.insert({name:'gaseosa',precio:'1300',marca:'postobon'})
 db.products.insert({name:'pan',precio:'5300',marca:'bimbo'})
 db.products.find()
+
+```
 ## Install dependencies.
 
 ```
